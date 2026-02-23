@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioIQ – Your Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --black: #0A0A0A;
+            --dark: #111111;
+            --dark-card: #161616;
+            --text: #E8E0D0;
+            --text-dim: #8A8070;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 60px;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--text); }
+
+        .nav-right {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .nav-right strong { color: var(--gold); }
+
+        
+        .hero {
+            position: relative;
+            z-index: 1;
+            padding: 160px 60px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 0 auto 60px;
+        }
+
+    
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 60px 80px;
+        }
+
+        
+        .portfolio-header {
+            border: 1px solid rgba(201,168,76,0.25);
+            background: var(--dark-card);
+            padding: 48px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .portfolio-emoji {
+            font-size: 64px;
+            flex-shrink: 0;
+        }
+
+        .portfolio-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-info p {
+            font-size: 15px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+       
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-bottom: 24px;
+        }
+
+        .stat-box {
+            background: var(--dark-card);
+            border: 1px solid rgba(201,168,76,0.1);
+            padding: 32px 28px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        
+        .section-title {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            margin-top: 48px;
+        }
+
+        .allocation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .allocation-item {
+            background: var(--dark-card);
+            border: 1px solid rgba(201,168,76,0.1);
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .allocation-percent {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+            min-width: 80px;
+        }
+
+        .allocation-details {
+            flex: 1;
+        }
+
+        .allocation-asset {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .allocation-example {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .allocation-bar-wrap {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .allocation-bar {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 1s ease;
+        }
+
+       
+        .disclaimer {
+            border: 1px solid rgba(201,168,76,0.1);
+            background: rgba(201,168,76,0.03);
+            padding: 24px 28px;
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-top: 48px;
+        }
+
+        .disclaimer strong { color: var(--gold-light); }
+
+        
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(201,168,76,0.3);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            margin-top: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(201,168,76,0.08);
+            border-color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px 24px; }
+            .hero { padding: 120px 24px 60px; }
+            .content { padding: 0 24px 60px; }
+            .portfolio-header { flex-direction: column; text-align: center; }
+            .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">Portfolio<span>IQ</span></a>
+        <div class="nav-right">Recommended for <strong>{{ name }}</strong></div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-badge">Your personalised portfolio is ready</div>
+        <h1>Here is your <em>{{ portfolio.name }}</em> portfolio.</h1>
+        <p>Based on your profile and risk appetite, this is the portfolio we recommend for you.</p>
+    </div>
+
+    <div class="content">
+
+        
+        <div class="portfolio-header">
+            <div class="portfolio-emoji">
+                {% if portfolio.risk_level == "low risk" %}🛡️
+                {% elif portfolio.risk_level == "moderate" %}⚖️
+                {% else %}🚀{% endif %}
+            </div>
+            <div class="portfolio-info">
+                <h2>{{ portfolio.name }}</h2>
+                <p>{{ portfolio.description }}</p>
+            </div>
+        </div>
+
+    
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-value">{{ portfolio.risk_level }}</div>
+                <div class="stat-label">Risk Level</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">{{ portfolio.expected_return }}</div>
+                <div class="stat-label">Expected Return</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">{{ portfolio.allocation | length }}</div>
+                <div class="stat-label">Asset Classes</div>
+            </div>
+        </div>
+
+        
+        <div class="section-title">Asset Allocation Breakdown</div>
+        <div class="allocation-list">
+            {% for item in portfolio.allocation %}
+            <div class="allocation-item">
+                <div class="allocation-percent">{{ item.percent }}%</div>
+                <div class="allocation-details">
+                    <div class="allocation-asset">{{ item.asset }}</div>
+                    <div class="allocation-example">e.g. {{ item.example }}</div>
+                </div>
+                <div class="allocation-bar-wrap">
+                    <div class="allocation-bar" style="width: {{ item.percent }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+<div class="section-title">Live Fund Performance (Last 12 Months)</div>
+<div style="background: #161616; border: 1px solid rgba(201,168,76,0.1); padding: 32px; margin-bottom: 24px;">
+    <canvas id="fundChart"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+    const raw = {{ chart_data | safe }};
+    const ctx = document.getElementById('fundChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: raw.labels,
+            datasets: [{
+                label: raw.fund_name + ' NAV',
+                data: raw.values,
+                borderColor: '#C9A84C',
+                backgroundColor: 'rgba(201,168,76,0.08)',
+                borderWidth: 2,
+                pointRadius: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { labels: { color: '#E8E0D0' } }
+            },
+            scales: {
+                x: { ticks: { color: '#8A8070' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { ticks: { color: '#8A8070' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            }
+        }
+    });
+</script>
+
+
+
+<form action="/download-pdf" method="POST">
+    <input type="hidden" name="name" value="{{ name }}">
+    <input type="hidden" name="age" value="{{ age }}">
+    <input type="hidden" name="occupation" value="{{ occupation }}">
+    <input type="hidden" name="risk" value="{{ risk }}">
+    <button type="submit" class="btn-primary" style="margin-bottom: 16px;">
+        Download PDF Report →
+    </button>
+</form>
+
+
+
+
+
+
+
+
+        <a href="/" class="btn-outline">← Start Over</a>
+
+        
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> The portfolio shown is for educational and informational purposes only and does not constitute personalised financial advice. Past performance is not indicative of future results. Please consult a SEBI-registered investment adviser before making any investment decisions.
+        </div>
+
+    </div>
+
+</body>
+</html>

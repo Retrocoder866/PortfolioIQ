@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioIQ – Your Risk Appetite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --black: #0A0A0A;
+            --dark: #111111;
+            --dark-card: #161616;
+            --text: #E8E0D0;
+            --text-dim: #8A8070;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 60px;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--text); }
+
+        .step-indicator {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .step-indicator strong { color: var(--gold); }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 60px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 720px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover { color: var(--gold); }
+
+        .card-tag {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .card h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: var(--text-dim);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        /* HIDDEN FIELDS */
+        input[type="hidden"] { display: none; }
+
+        /* RISK CARDS */
+        .risk-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .risk-option input[type="radio"] {
+            display: none;
+        }
+
+        .risk-card {
+            border: 1px solid rgba(201,168,76,0.15);
+            background: var(--dark-card);
+            padding: 36px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .risk-card:hover {
+            border-color: rgba(201,168,76,0.4);
+            transform: translateY(-4px);
+        }
+
+        .risk-option input[type="radio"]:checked + .risk-card {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.08);
+        }
+
+        .risk-emoji {
+            font-size: 36px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .risk-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+        }
+
+        .risk-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .risk-return {
+            margin-top: 16px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        /* BUTTON */
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--gold);
+            color: var(--black);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 18px 48px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(201,168,76,0.25);
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px 24px; }
+            .risk-options { grid-template-columns: 1fr; }
+            .card h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">Portfolio<span>IQ</span></a>
+        <div class="step-indicator">Step <strong>2</strong> of 2</div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+
+            <a href="/details" class="back-link">← Back</a>
+
+            <div class="card-tag">Step 2 of 2</div>
+            <h1>What is your risk appetite?</h1>
+            <p>Choose how comfortable you are with market ups and downs. There is no right or wrong answer.</p>
+
+            <form action="/result" method="POST">
+
+                <!-- These carry the user's details from the previous page -->
+                <input type="hidden" name="name" value="{{ request.form.get('name', '') }}">
+                <input type="hidden" name="age" value="{{ request.form.get('age', '') }}">
+                <input type="hidden" name="occupation" value="{{ request.form.get('occupation', '') }}">
+
+                <div class="risk-options">
+
+                    <label class="risk-option">
+                        <input type="radio" name="risk" value="low risk" required>
+                        <div class="risk-card">
+                            <span class="risk-emoji">🛡️</span>
+                            <div class="risk-name">Conservative</div>
+                            <div class="risk-desc">I prefer stability. I am okay with lower returns as long as my money is safe.</div>
+                            <div class="risk-return">Expected: 7 to 9% yearly</div>
+                        </div>
+                    </label>
+
+                    <label class="risk-option">
+                        <input type="radio" name="risk" value="moderate">
+                        <div class="risk-card">
+                            <span class="risk-emoji">⚖️</span>
+                            <div class="risk-name">Moderate</div>
+                            <div class="risk-desc">I want a balance. Some risk is fine if it means better growth over time.</div>
+                            <div class="risk-return">Expected: 10 to 12% yearly</div>
+                        </div>
+                    </label>
+
+                    <label class="risk-option">
+                        <input type="radio" name="risk" value="High Risk">
+                        <div class="risk-card">
+                            <span class="risk-emoji">🚀</span>
+                            <div class="risk-name">Aggressive</div>
+                            <div class="risk-desc">I want maximum growth. I can handle short term losses for long term gains.</div>
+                            <div class="risk-return">Expected: 14 to 18% yearly</div>
+                        </div>
+                    </label>
+
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Get My Portfolio →
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

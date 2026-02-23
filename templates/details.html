@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioIQ – Tell Us About You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --black: #0A0A0A;
+            --dark: #111111;
+            --dark-card: #161616;
+            --text: #E8E0D0;
+            --text-dim: #8A8070;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 60px;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--text); }
+
+        .step-indicator {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .step-indicator strong {
+            color: var(--gold);
+        }
+
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 60px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+        }
+
+        .card-tag {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .card h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: var(--text-dim);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        
+        .form-group {
+            margin-bottom: 32px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        input, select {
+            width: 100%;
+            background: var(--dark-card);
+            border: 1px solid rgba(201,168,76,0.15);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            padding: 16px 20px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            appearance: none;
+        }
+
+        input::placeholder {
+            color: var(--text-dim);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--gold);
+        }
+
+        select option {
+            background: var(--dark);
+            color: var(--text);
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '↓';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            pointer-events: none;
+        }
+
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 18px 48px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            margin-top: 16px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(201,168,76,0.25);
+        }
+
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px 24px; }
+            .card h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">Portfolio<span>IQ</span></a>
+        <div class="step-indicator">Step <strong>1</strong> of 2</div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+
+            <a href="/" class="back-link">← Back</a>
+
+            <div class="card-tag">Step 1 of 2</div>
+            <h1>Tell us about yourself.</h1>
+            <p>Just a few details so we can personalise your experience.</p>
+
+            <form action="/risk" method="POST">
+
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="e.g. Ranveer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Your Age</label>
+                    <input type="number" id="age" name="age" placeholder="e.g. 22" min="18" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation">Your Occupation</label>
+                    <div class="select-wrapper">
+                        <select id="occupation" name="occupation" required>
+                            <option value="" disabled selected>Select your occupation</option>
+                            <option value="student">Student</option>
+                            <option value="salaried">Salaried Employee</option>
+                            <option value="self_employed">Self Employed</option>
+                            <option value="business">Business Owner</option>
+                            <option value="freelancer">Freelancer</option>
+                            <option value="retired">Retired</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Continue →
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>

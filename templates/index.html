@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PortfolioIQ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+--gold:#C9A84C;
+--gold-bright:#FFD700;
+--black:#0A0A0A;
+--dark:#111;
+--text:#E8E0D0;
+--text-dim:#8A8070;
+}
+
+body{
+background:var(--black);
+color:var(--text);
+font-family:'DM Sans',sans-serif;
+overflow-x:hidden;
+}
+
+
+nav{
+position:fixed;
+top:0;left:0;right:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:24px 60px;
+background:rgba(10,10,10,0.9);
+border-bottom:1px solid rgba(201,168,76,0.1);
+z-index:100;
+}
+
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:26px;
+font-weight:700;
+color:var(--gold);
+}
+.logo span{color:var(--text);}
+
+.nav-tag{
+font-size:11px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--text-dim);
+}
+
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:140px 40px 60px;
+position:relative;
+}
+
+.hero-badge{
+border:1px solid rgba(201,168,76,0.3);
+border-radius:100px;
+padding:8px 20px;
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:48px;
+}
+
+.hero h1{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(52px,8vw,96px);
+font-weight:300;
+line-height:1.05;
+margin-bottom:32px;
+}
+
+.hero h1 em{
+font-style:italic;
+color:var(--gold);
+}
+
+.hero p{
+font-size:18px;
+color:var(--text-dim);
+max-width:520px;
+line-height:1.7;
+margin-bottom:60px;
+}
+
+.btn-primary{
+position:relative;
+display:inline-block;
+padding:20px 70px;
+background:#000;
+color:var(--gold-bright);
+text-decoration:none;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+border-radius:6px;
+border:2px solid var(--gold);
+overflow:hidden;
+z-index:1;
+}
+
+.btn-primary::before{
+content:"";
+position:absolute;
+inset:-2px;
+background:linear-gradient(90deg,var(--gold-bright),transparent,var(--gold-bright));
+background-size:300%;
+z-index:-1;
+animation:borderRun 4s linear infinite;
+}
+
+@keyframes borderRun{
+0%{background-position:0%}
+100%{background-position:300%}
+}
+
+.btn-primary:hover{
+box-shadow:
+0 0 10px var(--gold-bright),
+0 0 25px var(--gold-bright),
+0 0 50px rgba(255,215,0,0.5);
+}
+
+
+.hero-sub-note{
+margin-top:30px;
+font-size:17px;
+font-weight:700;
+color:#ffffff;
+}
+
+
+.hero-divider {
+    margin-top: 70px;
+    width: 100%;
+    height: 3px;              
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--gold) 15%,
+        var(--gold-bright) 50%,
+        var(--gold) 85%,
+        transparent 100%
+    );
+    box-shadow: 0 0 12px rgba(255,215,0,0.4);
+}
+
+@keyframes moveLine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes moveLine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* STATS */
+.stats-bar{
+display:flex;
+justify-content:center;
+border-top:1px solid rgba(201,168,76,0.1);
+border-bottom:1px solid rgba(201,168,76,0.1);
+background:rgba(22,22,22,0.8);
+}
+
+.stat{
+flex:1;
+max-width:260px;
+padding:40px 32px;
+text-align:center;
+border-right:1px solid rgba(201,168,76,0.1);
+}
+
+.stat:last-child{border-right:none;}
+
+.stat-number{
+font-family:'Cormorant Garamond',serif;
+font-size:42px;
+color:var(--gold);
+margin-bottom:8px;
+}
+
+.stat-label{
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:var(--text-dim);
+}
+
+/* DISCLAIMER */
+.disclaimer{
+text-align:center;
+padding:50px 60px;
+border-top:1px solid rgba(255,255,255,0.05);
+font-size:12px;
+color:var(--text-dim);
+max-width:900px;
+margin:0 auto;
+line-height:1.7;
+}
+
+footer{
+text-align:center;
+padding:24px;
+font-size:12px;
+color:rgba(138,128,112,0.4);
+}
+
+@media(max-width:768px){
+nav{padding:20px;}
+.stats-bar{flex-direction:column;}
+.stat{border-right:none;border-bottom:1px solid rgba(201,168,76,0.1);}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">Portfolio<span>IQ</span></div>
+<div class="nav-tag">Smart Investing for India</div>
+</nav>
+
+<section class="hero">
+
+<div class="hero-badge">India's Portfolio Recommender</div>
+
+<h1>
+Invest with<br><em>intelligence.</em>
+</h1>
+
+<p>
+Answer three simple questions and get a curated investment portfolio — built on India's most trusted funds and ETFs.
+</p>
+
+<a href="/details" class="btn-primary">
+GET MY PORTFOLIO
+</a>
+
+<div class="hero-sub-note">
+Free. Instant. No sign-up required.
+</div>
+
+<div class="hero-divider"></div>
+
+</section>
+
+<div class="stats-bar">
+<div class="stat">
+<div class="stat-number">5+</div>
+<div class="stat-label">Curated Portfolios</div>
+</div>
+<div class="stat">
+<div class="stat-number">₹0</div>
+<div class="stat-label">Cost to Use</div>
+</div>
+<div class="stat">
+<div class="stat-number">3</div>
+<div class="stat-label">Questions Only</div>
+</div>
+</div>
+
+<div class="disclaimer">
+<strong>Disclaimer:</strong> The portfolios shown on PortfolioIQ are for educational and informational purposes only and do not constitute personalized financial advice. Past performance is not indicative of future results. Please consult a SEBI-registered investment adviser before making any investment decisions.
+</div>
+
+<footer>
+© 2025 PortfolioIQ · Built for Indian Investors
+</footer>
+
+</body>
+</html>
